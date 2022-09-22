@@ -14,7 +14,10 @@
     },
     "strict": true,
     "noImplicitThis": true,
-    "types": ["element-plus/global"],
+    "types": [
+      "element-plus/global"
+    ],
+    "preserveValueImports": false,
     "isolatedModules": true
   },
   "references": [

@@ -1,13 +1,9 @@
-interface I_user {
+import { eventEmit, e_eventT } from "@/utils/eventUtil";
+
+export interface I_user {
     name: string,
-    userType: e_userType,
 }
 
-enum e_userType {
-    superAdmin,
-    admin,
-    user,
-}
 
 class Store {
     private user: I_user = { "name": "ahuang" } as any;
@@ -18,6 +14,7 @@ class Store {
 
     setUser(user: I_user) {
         this.user = user;
+        eventEmit(e_eventT.userInfo, user);
     }
 }
 

@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 
 import NotFoundVue from '@/components/NotFound.vue';
-import DashboardVue from '@/views/dashboard/index.vue';
+import DashBoardVue from '@/views/dashboard/DashBoard.vue';
 import LoginVue from '@/views/login/login.vue';
 import ServerListVue from '@/views/serverlist/ServerList.vue';
 import ServerStartVue from '@/views/serverstart/ServerStart.vue';
+import ChangeNameVue from '@/views/changeName/ChangeName.vue';
 
 // 我们后面再讨论嵌套路由。
 let routes: RouteRecordRaw[] = [
@@ -16,7 +17,12 @@ let routes: RouteRecordRaw[] = [
 	{
 		name: "dashboard",
 		path: '/',
-		component: DashboardVue
+		component: DashBoardVue
+	},
+	{
+		name: "changename",
+		path: '/changename',
+		component: ChangeNameVue,
 	},
 	{
 		name: "login",

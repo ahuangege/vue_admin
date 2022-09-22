@@ -7,22 +7,48 @@
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item command="meInfo">个人信息</el-dropdown-item>
+                    <el-dropdown-item command="changeName">改名</el-dropdown-item>
                     <el-dropdown-item command="logout">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </template>
         </el-dropdown>
-        <span>Tom99999</span>
+        <span>{{username}}</span>
     </div>
 </template>
 
 <script lang="ts" setup>
+import store, { I_user } from '@/store/store';
+import { eventOff, eventOn, e_eventT } from '@/utils/eventUtil';
 import { Setting } from '@element-plus/icons-vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 let router = useRouter();
+
+let username = ref("");
+
+function onUserInfoChanged(user: I_user) {
+    if (user) {
+        username.value = user.name;
+    }
+}
+
+onMounted(() => {
+    onUserInfoChanged(store.getUser())
+    eventOn(e_eventT.userInfo, onUserInfoChanged);
+});
+
+onUnmounted(() => {
+    eventOff(e_eventT.userInfo, onUserInfoChanged);
+});
+
+
 
 function command(cmd: string) {
     if (cmd === "meInfo") {
         router.push({ "path": "/" });
+    } else if (cmd === "changeName") {
+        router.push({ "path": "/changename" });
     } else if (cmd === "logout") {
         // router.push({ "path": "/" });
     }
