@@ -28,4 +28,4 @@ web/.vscode/*
 *.sw?
 
 server/dist
-server/node_module
+server/node_modules
