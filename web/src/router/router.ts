@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-rou
 
 import NotFoundVue from '@/components/NotFound.vue';
 import DashBoardVue from '@/views/dashboard/DashBoard.vue';
-import LoginVue from '@/views/login/login.vue';
 import ServerListVue from '@/views/serverlist/ServerList.vue';
 import ServerStartVue from '@/views/serverstart/ServerStart.vue';
 import ChangeNameVue from '@/views/changeName/ChangeName.vue';
@@ -27,7 +26,7 @@ let routes: RouteRecordRaw[] = [
 	{
 		name: "login",
 		path: '/login',
-		component: LoginVue
+		component:  () => import('@/views/login/login.vue')
 	},
 	{
 		path: '/serverinfo',

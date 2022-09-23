@@ -9,4 +9,9 @@ import router from './router/router';
 let app = createApp(App);
 app.use(ElementPlus);
 app.use(router);
+
+app.config.errorHandler = function(err){
+    console.error(err);
+}
+
 app.mount('#app');

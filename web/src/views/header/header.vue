@@ -33,8 +33,13 @@ function onUserInfoChanged(user: I_user) {
     }
 }
 
+if (!store.getUser()) {
+    router.push("/login");
+} else {
+    username.value = store.getUser().name;
+}
+
 onMounted(() => {
-    onUserInfoChanged(store.getUser())
     eventOn(e_eventT.userInfo, onUserInfoChanged);
 });
 
@@ -50,7 +55,8 @@ function command(cmd: string) {
     } else if (cmd === "changeName") {
         router.push({ "path": "/changename" });
     } else if (cmd === "logout") {
-        // router.push({ "path": "/" });
+        store.setUser(null as any);
+        router.push({ "path": "/login" });
     }
 }
 

@@ -76,19 +76,17 @@
 
 <script lang="ts" setup>
 import { Menu as IconMenu, View, UserFilled, Document, Cpu, CircleCheck, CircleClose, Edit } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 let router = useRouter();
+let route = useRoute();
 
-let nowPath = "";
 
 function handleSelect(key: string, keyPath: string[]) {
-    let tmpPath = keyPath.join("/");
-    // console.log(tmpPath);
-    if (nowPath === tmpPath) {
+    let tmpPath = "/" + keyPath.join("/");
+    if (tmpPath === route.path) {
         return;
     }
-    nowPath = tmpPath;
-    router.push({ "path": "/" + nowPath });
+    router.push({ "path": tmpPath });
 }
 </script>
       
