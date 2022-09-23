@@ -26,3 +26,6 @@ web/.vscode/*
 *.njsproj
 *.sln
 *.sw?
+
+server/dist
+server/node_modules

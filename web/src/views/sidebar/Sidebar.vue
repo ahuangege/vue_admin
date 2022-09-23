@@ -54,7 +54,7 @@
                         <IconMenu />
                     </el-icon>活动
                 </template>
-                <el-menu-item index="list" disabled>
+                <el-menu-item index="activitylist" disabled>
                     <template #title>
                         <el-icon>
                             <Document />

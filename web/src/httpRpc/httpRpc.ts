@@ -1,14 +1,13 @@
 import axios from 'axios'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import store from '@/store/store';
-import {createHttpRpcClient} from 'i-http-rpc';
+import { createHttpRpcClient } from 'i-http-rpc';
 import router from "../router/router";
-import type {httpRpc_admin} from "./httpRpc_admin";
+import type { httpRpc_admin } from "./httpRpc_admin";
 
 // create an axios instance
 const service = axios.create({
-    // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-    baseURL: "http://127.0.0.1:3000", // url = base url + request url
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     timeout: 5000 // request timeout
 })
 
@@ -36,7 +35,7 @@ service.interceptors.request.use(
 
 // response interceptor
 service.interceptors.response.use(response => {
-    const res:{"code": number, "errMsg"?: string, "data": any} = response.data;
+    const res: { "code": number, "errMsg"?: string, "data": any } = response.data;
     if (res.code !== 0) {
         ElMessage({
             message: res.errMsg || 'Error',
@@ -48,7 +47,7 @@ service.interceptors.response.use(response => {
         if (res.code === 80004) {
             store.setToken("");
             store.setUser(null as any);
-            router.push({"path": "/login"});
+            router.push({ "path": "/login" });
         }
         return Promise.reject(new Error(res.errMsg || 'Error'))
     } else {
@@ -68,10 +67,10 @@ service.interceptors.response.use(response => {
 
 
 /**  http 发送函数 */
-async function  httpRequest(initOptions: any, options: any, cmds: string[], args: any[]): Promise<any> {
-    return service.request({        
-        "method": "get",
-        "data": { 
+async function httpRequest(initOptions: any, options: any, cmds: string[], args: any[]): Promise<any> {
+    return service.request({
+        "method": "POST",
+        "data": {
             "file": cmds[0],
             "method": cmds[1],
             "args": args
@@ -79,4 +78,4 @@ async function  httpRequest(initOptions: any, options: any, cmds: string[], args
     });
 }
 
-export let httpClient = createHttpRpcClient<httpRpc_admin>({"url":"", "httpRequest": httpRequest});
+export let httpClient = createHttpRpcClient<httpRpc_admin>({ "url": "", "httpRequest": httpRequest });

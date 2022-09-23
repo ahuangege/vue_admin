@@ -14,9 +14,7 @@ let router = useRouter();
 let username = ref("");
 
 let userInfo = store.getUser();
-if (!userInfo) {
-    router.push("/login");
-} else {
+if (userInfo) {
     username.value = userInfo.name;
 }
 

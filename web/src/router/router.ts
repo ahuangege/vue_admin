@@ -1,46 +1,35 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 
-import NotFoundVue from '@/components/NotFound.vue';
-import DashBoardVue from '@/views/dashboard/DashBoard.vue';
-import ServerListVue from '@/views/serverlist/ServerList.vue';
-import ServerStartVue from '@/views/serverstart/ServerStart.vue';
-import ChangeNameVue from '@/views/changeName/ChangeName.vue';
-
 // 我们后面再讨论嵌套路由。
 let routes: RouteRecordRaw[] = [
 	{
 		name: "404",
 		path: '/:pathMatch(.*)*',
-		component: NotFoundVue
+		component: () => import('@/components/NotFound.vue')
 	},
 	{
 		name: "dashboard",
 		path: '/',
-		component: DashBoardVue
-	},
-	{
-		name: "changename",
-		path: '/changename',
-		component: ChangeNameVue,
+		component: () => import('@/views/dashboard/DashBoard.vue')
 	},
 	{
 		name: "login",
 		path: '/login',
-		component:  () => import('@/views/login/login.vue')
+		component: () => import('@/views/login/login.vue')
 	},
 	{
 		path: '/serverinfo',
 		children: [
 			{
 				path: 'list',
-				component: ServerListVue
+				component: () => import('@/views/serverlist/ServerList.vue')
 			},
 			{
 				path: 'action',
 				children: [
 					{
 						path: 'start',
-						component: ServerStartVue
+						component: () => import('@/views/serverstart/ServerStart.vue')
 					}
 				]
 			}
