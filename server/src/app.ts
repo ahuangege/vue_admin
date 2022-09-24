@@ -32,7 +32,7 @@ if (app.serverId === "connector-server-1") {
 }
 
 if (app.serverType === "master") {
-    // 启动http监听
+     // 启动http监听
     createHttpRpcServer({ "port": 4003, "msgPath": path.join(__dirname, "./app/httpRpcHandlerMaster") });
 }
 
