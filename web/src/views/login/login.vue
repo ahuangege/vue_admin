@@ -45,11 +45,6 @@ async function btnLogin() {
 	}
 
 }
-let tmp = import.meta.env.BASE_URL;
-console.log(import.meta.env)
-console.log("baseurl", tmp)
-tmp = import.meta.env.VITE_API_BASE_URL;
-console.log("VITE_API_BASE_URL", tmp)
 </script>
 
 
