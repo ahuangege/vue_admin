@@ -7,6 +7,10 @@ web/yarn-error.log*
 web/pnpm-debug.log*
 web/lerna-debug.log*
 
+server/dist
+server/node_modules
+
+
 web/node_modules
 .DS_Store
 web/dist
@@ -27,5 +31,3 @@ web/.vscode/*
 *.sln
 *.sw?
 
-server/dist
-server/node_modules
