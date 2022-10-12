@@ -50,15 +50,17 @@ export class AdminHttpRpcServer {
                 msg += chuck;
             });
             request.on("end", async () => {
-
+                console.log("↑ ", msg);
                 let msgObj: { "file": string, "method": string, "args": any[] };
                 try {
                     msgObj = JSON.parse(msg);
                 } catch (e) {
+                    console.log(" ↓", errList.needJson);
                     return response.end(errList.needJson);
                 }
                 let file = this.handlers[msgObj.file];
                 if (!file || !file[msgObj.method]) {
+                    console.log(" ↓", errList.noHandler);
                     return response.end(errList.noHandler);
                 }
 
@@ -66,10 +68,12 @@ export class AdminHttpRpcServer {
                 if (msgObj.method !== "login" && msgObj.method !== "loginByToken") {
                     let token = request.headers["x-token"] as string;
                     if (!token) {
+                        console.log(" ↓", errList.needLogin);
                         return response.end(errList.needLogin);
                     }
                     let user = app.get<UserMgr>("userMgr").getUserByToken(token);
                     if (!user) {
+                        console.log(" ↓", errList.needLogin);
                         return response.end(errList.needLogin);
                     }
                 }
@@ -79,7 +83,9 @@ export class AdminHttpRpcServer {
                 if (data === undefined) {
                     data = null;
                 }
-                response.end(JSON.stringify({ "code": 0, "data": data }));
+                let dataStr = JSON.stringify({ "code": 0, "data": data });
+                console.log(" ↓", dataStr);
+                response.end(dataStr);
             });
 
         });

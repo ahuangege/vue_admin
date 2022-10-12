@@ -5,36 +5,47 @@ let routes: RouteRecordRaw[] = [
 	{
 		name: "404",
 		path: '/:pathMatch(.*)*',
-		component: () => import('@/components/NotFound.vue')
+		component: () => import('@/views/notfound404/NotFound.vue')
 	},
-	{
-		name: "dashboard",
-		path: '/',
-		component: () => import('@/views/dashboard/DashBoard.vue')
-	},
+
 	{
 		name: "login",
 		path: '/login',
 		component: () => import('@/views/login/login.vue')
 	},
+
 	{
-		path: '/serverinfo',
+		name: "",
+		path: '/',
+		component: () => import('@/views/layout/Layout.vue'),
 		children: [
 			{
-				path: 'list',
-				component: () => import('@/views/serverlist/ServerList.vue')
+				name: "dashboard",
+				path: '',
+				component: () => import('@/views/dashboard/DashBoard.vue')
 			},
+
 			{
-				path: 'action',
+				path: 'serverinfo',
 				children: [
 					{
-						path: 'start',
-						component: () => import('@/views/serverstart/ServerStart.vue')
+						path: 'list',
+						component: () => import('@/views/serverinfo/ServerList.vue')
+					},
+					{
+						path: 'action',
+						children: [
+							{
+								path: 'start',
+								component: () => import('@/views/serverinfo/ServerStart.vue')
+							}
+						]
 					}
 				]
-			}
+			},
 		]
 	},
+
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

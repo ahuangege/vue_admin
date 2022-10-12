@@ -1,9 +1,9 @@
 <template>
-	<el-dialog v-model="dialogFormVisible" title="" :show-close="constFalse" :close-on-press-escape="constFalse"
+	<el-dialog v-model="dialogFormVisible" title="后台管理系统" :show-close="constFalse" :close-on-press-escape="constFalse"
 		:close-on-click-modal="constFalse" width="500px" center>
 		<el-form :model="form">
 			<el-form-item label="账号" :label-width="formLabelWidth">
-				<el-input v-model="form.username" />
+				<el-input v-model="form.username" placeholder="admin" />
 			</el-form-item>
 			<el-form-item label="密码" :label-width="formLabelWidth">
 				<el-input v-model="form.password" type="password" show-password />
@@ -30,7 +30,7 @@ const constFalse = ref(false);
 const formLabelWidth = '100px'
 
 const form = reactive({
-	username: '',
+	username: 'admin',
 	password: '',
 })
 
